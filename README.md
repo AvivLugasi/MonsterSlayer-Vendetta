@@ -1,2 +1,2 @@
 # YamamRaidUnit
-2D RTS game
+2D RTS game under development
