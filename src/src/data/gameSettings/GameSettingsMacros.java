@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class GameSettingsMacros {
 
-    public static final String GAME_TITLE = "Yamam - Raid Unit";
+    public static final String GAME_TITLE = "Monster Slayer - Vendetta";
 
     public static final int FRAME_EXTENDED_STATE = JFrame.MAXIMIZED_BOTH;
 
