@@ -1,11 +1,11 @@
-package model;
+package model.entities;
 
 import static data.gameSettings.PlayerSettingsMacros.*;
 
 /**
  * represents the player
  */
-public class Player extends  Entity{
+public class Player extends Entity {
 
     /**
      * Player's energy - define player's ability to perform strength consuming cations

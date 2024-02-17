@@ -1,4 +1,4 @@
-package model;
+package model.entities;
 
 import static data.gameSettings.GameSettingsMacros.*;
 import static data.gameSettings.GameSettingsMacros.DEFAULT_TILE_SIZE;
