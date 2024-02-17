@@ -1,9 +1,7 @@
 package view.gui;
 
-import data.gameSettings.GameSettingsMacros;
-
+import static data.gameSettings.GameSettingsMacros.*;
 import javax.swing.*;
-import java.awt.*;
 
 public class Utils {
 
@@ -13,17 +11,18 @@ public class Utils {
         // Set the frame location to middle
         frame.setLocationRelativeTo(null);
 
-        frame.setResizable(GameSettingsMacros.FRAME_RESIZABLE);
+        frame.setResizable(FRAME_RESIZABLE);
 
         // Create a panel to hold content
         JPanel panel = new JPanel();
-        panel.setBackground(GameSettingsMacros.MAIN_FRAME_PANEL_BACKGROUND_COLOR); // Set panel background color
+        panel.setBackground(MAIN_FRAME_PANEL_BACKGROUND_COLOR); // Set panel background color
 
         // Set default close operation
-        frame.setDefaultCloseOperation(GameSettingsMacros.FRAME_DEFAULT_CLOSE_OP);
+        frame.setDefaultCloseOperation(FRAME_DEFAULT_CLOSE_OP);
 
         // Make the frame visible
         frame.setVisible(true);
         return frame;
     }
+
 }

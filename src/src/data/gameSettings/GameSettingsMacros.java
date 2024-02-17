@@ -15,8 +15,16 @@ public class GameSettingsMacros {
 
     public static final Color MAIN_FRAME_PANEL_BACKGROUND_COLOR = Color.BLACK;
 
-    public static final  int DEFAULT_TILE_SIZE = 48;
+    public static final  int DEFAULT_TILE_SIZE = 96;
 
-    public static final int MAX_SCREEN_COL = 24;
-    public static final int MAX_SCREEN_ROW = 16;
+    public static final int MAX_SCREEN_COL = 14;
+    public static final int MAX_SCREEN_ROW = 10;
+
+    public static final int FPS = 60;
+
+    public static final long NANO = 1000000000;
+
+    public static final long NANO_TO_MILI = 1000000;
+
+    public static final double DRAW_INTERVAL = (double) NANO / FPS; // draw on the screen every 0.016667 seconds
 }
