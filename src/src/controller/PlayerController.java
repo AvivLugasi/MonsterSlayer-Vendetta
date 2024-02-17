@@ -17,6 +17,10 @@ public class PlayerController {
     }
 
     public void update(){
+        handleMovement();
+    }
+
+    private void handleMovement(){
         int current_x = this.player.getPositionX();
         int current_y = this.player.getPositionY();
         int speed = this.player.getSpeed();
