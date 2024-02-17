@@ -27,4 +27,8 @@ public class GameSettingsMacros {
     public static final long NANO_TO_MILI = 1000000;
 
     public static final double DRAW_INTERVAL = (double) NANO / FPS; // draw on the screen every 0.016667 seconds
+
+    public static final String PROJECT_PATH = System.getProperty("user.dir");
+
+    public static final String ASSETS_DIR = PROJECT_PATH + "\\src\\src\\view\\assets";
 }

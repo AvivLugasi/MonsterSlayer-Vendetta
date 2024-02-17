@@ -1,8 +1,14 @@
 package controller;
 
+import model.entities.Entity;
 import model.entities.Player;
+import model.entities.enums.EntityDirections;
+import view.Utils;
+import view.gui.interfaces.EntityController;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import static data.gameSettings.GameSettingsMacros.*;
 import static data.gameSettings.PlayerSettingsMacros.*;
@@ -10,7 +16,7 @@ import static data.gameSettings.PlayerSettingsMacros.*;
 /**
  * Control the model.Player class status and paints it
  */
-public class PlayerController{
+public class PlayerController implements EntityController {
 
     /**
      * Entity of the model.Player class
@@ -21,6 +27,8 @@ public class PlayerController{
      * input handler for handling user inputs from the gamePanel instance that uses this controller
      */
     private final InputHandler inputHandler;
+
+    public Utils utils = new Utils();
 
 
     /**
@@ -54,15 +62,23 @@ public class PlayerController{
         int current_x = this.player.getPositionX();
         int current_y = this.player.getPositionY();
         int speed = this.player.getSpeed();
-
+        // we assume the player isn't static, if no movement key was pressed then
+        // we will set isStatic = false
+        this.player.setStatic(false);
         if(this.inputHandler.getUp()){
             this.player.setPositionY(current_y - speed);
+            this.player.setDirection(EntityDirections.UP);
         }else if(this.inputHandler.getLeft()){
             this.player.setPositionX(current_x - speed);
+            this.player.setDirection(EntityDirections.LEFT);
         }else if(this.inputHandler.getDown()){
             this.player.setPositionY(current_y + speed);
+            this.player.setDirection(EntityDirections.DOWN);
         }else if(this.inputHandler.getRight()){
             this.player.setPositionX(current_x + speed);
+            this.player.setDirection(EntityDirections.RIGHT);
+        } else{
+            this.player.setStatic(true);
         }
     }
 
@@ -72,15 +88,37 @@ public class PlayerController{
      */
     public void paintComponent(Graphics2D graphics2D){
         try {
-            graphics2D.setColor(Color.white);
-            graphics2D.fillRect(this.player.getPositionX(),
-                    this.player.getPositionY(),
-                    this.player.getWidth(),
-                    this.player.getHeight());
+            this.draw(graphics2D);
             graphics2D.dispose();
         } catch(IllegalArgumentException e){
-            System.out.println("Expected to get Graphics2D instance");
+            //System.out.println("Expected to get Graphics2D instance");
         }
+    }
+
+    private void draw(Graphics2D graphics2D){
+        this.utils.draw(graphics2D, this);
+    }
+
+    @Override
+    public Entity getEntity() {
+        return this.player;
+    }
+
+    public ArrayList<String> getAnimations(){
+        ArrayList<String> animationsPathsList = null;
+        switch(this.player.getDirection()){
+            case UP:
+                break;
+            case DOWN:
+                break;
+            case LEFT:
+                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_LEFT));
+                break;
+            case RIGHT:
+                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_RIGHT));
+                break;
+        }
+        return animationsPathsList;
     }
 
 }

@@ -1,4 +1,4 @@
-import view.gui.GamePanel;
+import view.GamePanel;
 import view.Utils;
 import javax.swing.*;
 

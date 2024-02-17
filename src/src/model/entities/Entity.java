@@ -1,11 +1,10 @@
 package model.entities;
 
-import static data.gameSettings.GameSettingsMacros.*;
-import static data.gameSettings.GameSettingsMacros.DEFAULT_TILE_SIZE;
-import static data.gameSettings.PlayerSettingsMacros.*;
-import static data.gameSettings.PlayerSettingsMacros.PLAYER_TILE_SIZE;
+import model.entities.enums.EntityDirections;
+import model.interfaces.DynamicStatus;
+import java.awt.image.BufferedImage;
 
-public class Entity {
+public abstract class Entity implements DynamicStatus{
     /**
      * Entity's x coordinates on the screen
      */
@@ -37,6 +36,25 @@ public class Entity {
     private int speed;
 
     /**
+     * Entity Direction
+     */
+    private EntityDirections direction;
+
+    /**
+     * whether the entity is static
+     */
+    private boolean isStatic;
+
+    /**
+     * Current image of the entity
+     */
+    private BufferedImage image;
+
+    public int spriteCounter = 0;
+
+    public int spriteNum = 1;
+
+    /**
      * Initialize the Entity
      */
     public Entity(int x,
@@ -51,6 +69,8 @@ public class Entity {
         this.speed = speed;
         this.width = width;
         this.height = height;
+        this.direction = EntityDirections.RIGHT;
+        this.isStatic = true;
     }
 
     public void setPositionX(int x){
@@ -96,4 +116,29 @@ public class Entity {
     public int getPositionY(){
         return this.positionY;
     }
+
+    public EntityDirections getDirection(){
+        return this.direction;
+    }
+
+    public void setDirection(EntityDirections direction){
+        this.direction = direction;
+    }
+
+    public void setStatic(boolean isStatic){
+        this.isStatic = isStatic;
+    }
+
+    public boolean getStatic(){
+        return this.isStatic;
+    }
+
+    public BufferedImage getImage(){
+        return this.image;
+    }
+
+    public void setImage(BufferedImage image){
+        this.image = image;
+    }
+
 }

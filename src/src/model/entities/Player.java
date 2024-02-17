@@ -28,4 +28,5 @@ public class Player extends Entity {
     public int getEnergy(){
         return this.energy;
     }
+
 }
