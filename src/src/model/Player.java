@@ -4,21 +4,49 @@ import static data.gameSettings.GameSettingsMacros.*;
 import static data.gameSettings.PlayerSettingsMacros.*;
 import static data.gameSettings.PlayerSettingsMacros.INITIAL_PLAYER_ENERGY;
 
+/**
+ * represents the player
+ */
 public class Player {
 
+    /**
+     * Player's x coordinates on the screen
+     */
     private int positionX;
+
+    /**
+     * Player's y coordinates on the screen
+     */
     private int positionY;
 
+    /**
+     * Player's tile width on the screen
+     */
     private final int width;
 
+    /**
+     * Player's tile height on the screen
+     */
     private final int height;
 
+    /**
+     * Player's health
+     */
     private int health;
 
+    /**
+     * Player's speed - define how fast it changes position on the screen
+     */
     private int speed;
 
+    /**
+     * Player's energy - define player's ability to perform strength consuming cations
+     */
     private int energy;
 
+    /**
+     * Initialize the player
+     */
     public Player(){
         // setting default position at the center of the screen
         this.positionX = (DEFAULT_TILE_SIZE*MAX_SCREEN_COL/2)-DEFAULT_TILE_SIZE/2;

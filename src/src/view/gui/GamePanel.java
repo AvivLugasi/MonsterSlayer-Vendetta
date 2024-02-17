@@ -4,87 +4,125 @@ import javax.swing.*;
 
 import controller.InputHandler;
 import controller.PlayerController;
+import view.Utils;
+import view.gui.interfaces.ObjectOnPanel;
 
 import java.awt.*;
 
 import static data.gameSettings.GameSettingsMacros.*;
 
-public class GamePanel extends JPanel implements  Runnable{
+/**
+ * Represents the game screen
+ */
+public class GamePanel extends JPanel implements  Runnable, ObjectOnPanel {
 
     // game screen settings
+    /**
+     * The tile size on the panel
+     */
     public final int TILE_SIZE;
 
+    /**
+     * the screen width = MAX_SCREEN_COL * TILE_SIZE
+     */
     public final int SCREEN_WIDTH;
 
+    /**
+     * the screen height = MAX_SCREEN_ROW * TILE_SIZE
+     */
     public final int SCREEN_HEIGHT;
 
-    private Thread panel_thread;
+    /**
+     * The thread of the panel, when alive actions can
+     * be executed concurrently
+     */
+    private Thread panelThread;
 
+    /**
+     * Handler of user input
+     */
     private InputHandler inputHandler;
 
+    /**
+     * Communicate with the model.Player class and uses inputHandler for updating
+     * and painting player status on the panel
+     */
     PlayerController playerController;
 
+    /**
+     * Initialize the GamePanel
+     * @param BackGround (Color) - the background color of the screen
+     */
     public GamePanel(Color BackGround){
         this.TILE_SIZE = DEFAULT_TILE_SIZE; // 96X96 pixel entity
         this.SCREEN_WIDTH = MAX_SCREEN_COL * TILE_SIZE; // 1344
         this.SCREEN_HEIGHT = MAX_SCREEN_ROW * TILE_SIZE; // 960
-        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(BackGround);
-        this.setDoubleBuffered(true);
-        this.inputHandler = new InputHandler();
-        this.addKeyListener(this.inputHandler);
-        this.setFocusable(true);
-        this.playerController = new PlayerController(this.inputHandler);
+        // set panel general assets status
+        this.setAssetsStatus();
     }
 
+    /**
+     * Initialize the GamePanel
+     * @param BackGround (Color) - the background color of the screen
+     * @param tileSize (int) - the basic size of a size on the screen
+     * @param screenWidth (int) - the width of the screen
+     * @param screenHeight (int) - the height of the screen
+     */
     public GamePanel(Color BackGround, int tileSize, int screenWidth, int screenHeight){
         this.TILE_SIZE = tileSize;
         this.SCREEN_WIDTH = screenWidth;
         this.SCREEN_HEIGHT = screenHeight;
-        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(BackGround);
+        // set panel general assets status
+        this.setAssetsStatus();
+    }
+
+    private void setAssetsStatus(){
+        this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setDoubleBuffered(true);
         this.playerController = new PlayerController(this.inputHandler);
         this.inputHandler = new InputHandler();
         this.addKeyListener(this.inputHandler);
         this.setFocusable(true);
+        this.playerController = new PlayerController(this.inputHandler);
     }
 
     public void startPanelThread(){
-        this.panel_thread = new Thread(this);
-        this.panel_thread.start();
+        this.panelThread = new Thread(this);
+        this.panelThread.start();
     }
 
     public Thread getPanelThread(){
-        return this.panel_thread;
-    }
-    @Override
-    public void run(){
-        double nextDrawTime = System.nanoTime() + DRAW_INTERVAL;
-        while(this.panel_thread.isAlive()){
-            this.update();
-            this.repaint();
-            try{
-                double ramainingTime = nextDrawTime - System.nanoTime();
-                ramainingTime = ramainingTime / NANO_TO_MILI;
-                ramainingTime = ramainingTime < 0 ? 0: ramainingTime;
-                Thread.sleep((long) ramainingTime);
-                nextDrawTime += DRAW_INTERVAL;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        return this.panelThread;
     }
 
+    /**
+     * Start the game loop of the panel
+     * uses the implementation of view.Utils.run().
+     */
+    @Override
+    public void run(){
+        Utils.run(this);
+    }
+
+    /**
+     * Update the status of the entities on the screen
+     */
     public void update(){
         this.playerController.update();
     }
+
+    /**
+     * paint the status of the entities on the screen
+     * @param graphics (Graphics) - instance of the java.awt.graphics class
+     */
     public void paintComponent(Graphics graphics){
         try {
             super.paintComponent(graphics);
             Graphics2D graphics2D = (Graphics2D) graphics;
             this.playerController.paintComponent(graphics2D);
-            graphics2D.dispose();
+            graphics.dispose();
         } catch(IllegalArgumentException e){
             System.out.println("Expected to get Graphics2D instance");
         }

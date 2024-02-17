@@ -1,5 +1,5 @@
 import view.gui.GamePanel;
-import view.gui.Utils;
+import view.Utils;
 import javax.swing.*;
 
 import static data.gameSettings.GameSettingsMacros.*;
