@@ -4,6 +4,9 @@ import model.Player;
 
 import java.awt.*;
 
+import static data.gameSettings.GameSettingsMacros.*;
+import static data.gameSettings.PlayerSettingsMacros.*;
+
 /**
  * Control the model.Player class status and paints it
  */
@@ -12,12 +15,12 @@ public class PlayerController{
     /**
      * Entity of the model.Player class
      */
-    private Player player;
+    private final Player player;
 
     /**
      * input handler for handling user inputs from the gamePanel instance that uses this controller
      */
-    private InputHandler inputHandler;
+    private final InputHandler inputHandler;
 
 
     /**
@@ -25,7 +28,10 @@ public class PlayerController{
      * @param inputHandler (InputHandler) - input handler for handling user inputs
      */
     public PlayerController(InputHandler inputHandler){
-        this.player = new Player();
+        // setting default position at the center of the screen
+        int x = (DEFAULT_TILE_SIZE*MAX_SCREEN_COL/2)-DEFAULT_TILE_SIZE/2;
+        int y = (DEFAULT_TILE_SIZE*MAX_SCREEN_ROW/2)-DEFAULT_TILE_SIZE/2;
+        this.player = new Player(x, y, INITIAL_PLAYER_HEALTH, INITIAL_PLAYER_SPEED, PLAYER_TILE_SIZE, PLAYER_TILE_SIZE);
         this.inputHandler = inputHandler;
     }
 
