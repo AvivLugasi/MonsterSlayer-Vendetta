@@ -1,6 +1,6 @@
 package view;
 
-import view.gui.interfaces.ObjectOnPanel;
+import view.gui.interfaces.PanelOnFrame;
 
 import static data.gameSettings.GameSettingsMacros.*;
 import javax.swing.*;
@@ -41,7 +41,7 @@ public class Utils {
      * a rate of data.gameSettings.FPS(currently 60 fps)
      * @param entity (ObjectOnPanel) - implements the view.gui.interfaces.ObjectOnBoard interface
      */
-    public static void run(ObjectOnPanel entity){
+    public static void run(PanelOnFrame entity){
         double nextDrawTime = System.nanoTime() + DRAW_INTERVAL;
         while(entity.getPanelThread().isAlive()){
             entity.update();

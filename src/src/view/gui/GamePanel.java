@@ -5,7 +5,7 @@ import javax.swing.*;
 import controller.InputHandler;
 import controller.PlayerController;
 import view.Utils;
-import view.gui.interfaces.ObjectOnPanel;
+import view.gui.interfaces.PanelOnFrame;
 
 import java.awt.*;
 
@@ -14,7 +14,7 @@ import static data.gameSettings.GameSettingsMacros.*;
 /**
  * Represents the game screen
  */
-public class GamePanel extends JPanel implements  Runnable, ObjectOnPanel {
+public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
 
     // game screen settings
     /**

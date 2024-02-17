@@ -1,8 +1,6 @@
 package view.gui.interfaces;
 
-import java.awt.*;
-
-public interface ObjectOnPanel {
+public interface PanelOnFrame {
 
     void update();
 
