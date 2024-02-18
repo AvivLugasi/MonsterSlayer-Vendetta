@@ -108,8 +108,10 @@ public class PlayerController implements EntityController {
         ArrayList<String> animationsPathsList = null;
         switch(this.player.getDirection()){
             case UP:
+                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_UP));
                 break;
             case DOWN:
+                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_DOWN));
                 break;
             case LEFT:
                 animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_LEFT));

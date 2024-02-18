@@ -19,4 +19,6 @@ public class PlayerSettingsMacros {
     public static final String PLAYER_ARMORED_STATIC_STAND_RIGHT = PLAYER_ASSETS_STATIC_DIR + "\\staticPlayerArmoredStandRight-1.png";
 
     public static final String PLAYER_ARMORED_STATIC_STAND_LEFT = PLAYER_ASSETS_STATIC_DIR + "\\staticPlayerArmoredStandLeft-1.png";
+    public static final String PLAYER_ARMORED_STATIC_STAND_DOWN = PLAYER_ASSETS_STATIC_DIR + "\\staticPlayerArmoredStandDown-1.png";
+    public static final String PLAYER_ARMORED_STATIC_STAND_UP = PLAYER_ASSETS_STATIC_DIR + "\\staticPlayerArmoredStandUp-1.png";
 }
