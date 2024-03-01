@@ -66,60 +66,54 @@ public class PlayerController implements EntityController {
         // we will set isStatic = false
         this.player.setStatic(false);
         if(this.inputHandler.getUp()){
-            if(this.inputHandler.getRight()){
-                this.player.setPositionX(current_x + speed);
-                direction=RIGHT;
-            }
-            else if(this.inputHandler.getLeft()){
-                this.player.setPositionX(current_x - speed);
-                direction=LEFT;
-            }else{
-                direction=UP;
-            }
+            direction = getEntityDirectionsUpDown(current_x, speed, UP);
             this.player.setPositionY(current_y - speed);
             this.player.setDirection(direction);
         }else if(this.inputHandler.getLeft()){
-            if(this.inputHandler.getUp()){
-                this.player.setPositionY(current_y - speed);
-                direction=UP;
-            }
-            else if(this.inputHandler.getDown()){
-                this.player.setPositionY(current_y + speed);
-                direction=DOWN;
-            }else{
-                direction=LEFT;
-            }
+            direction = getEntityDirectionsLeftRight(current_y, speed, LEFT);
             this.player.setPositionX(current_x - speed);
             this.player.setDirection(direction);
         }else if(this.inputHandler.getDown()){
-            if(this.inputHandler.getRight()){
-                this.player.setPositionX(current_x + speed);
-                direction=RIGHT;
-            }
-            else if(this.inputHandler.getLeft()){
-                this.player.setPositionX(current_x - speed);
-                direction=LEFT;
-            }else{
-                direction=DOWN;
-            }
+            direction = getEntityDirectionsUpDown(current_x, speed, DOWN);
             this.player.setPositionY(current_y + speed);
             this.player.setDirection(direction);
         }else if(this.inputHandler.getRight()){
-            if(this.inputHandler.getUp()){
-                this.player.setPositionY(current_y - speed);
-                direction=UP;
-            }
-            else if(this.inputHandler.getDown()){
-                this.player.setPositionY(current_y + speed);
-                direction=DOWN;
-            }else{
-                direction=RIGHT;
-            }
+            direction = getEntityDirectionsLeftRight(current_y, speed, RIGHT);
             this.player.setPositionX(current_x + speed);
             this.player.setDirection(direction);
         } else{
             this.player.setStatic(true);
         }
+    }
+
+    private EntityDirections getEntityDirectionsLeftRight(int current_y, int speed, EntityDirections entityDirections) {
+        EntityDirections direction;
+        if(this.inputHandler.getUp()){
+            this.player.setPositionY(current_y - speed);
+            direction=UP;
+        }
+        else if(this.inputHandler.getDown()){
+            this.player.setPositionY(current_y + speed);
+            direction=DOWN;
+        }else{
+            direction= entityDirections;
+        }
+        return direction;
+    }
+
+    private EntityDirections getEntityDirectionsUpDown(int current_x, int speed, EntityDirections entityDirections) {
+        EntityDirections direction;
+        if(this.inputHandler.getRight()){
+            this.player.setPositionX(current_x + speed);
+            direction=RIGHT;
+        }
+        else if(this.inputHandler.getLeft()){
+            this.player.setPositionX(current_x - speed);
+            direction=LEFT;
+        }else{
+            direction= entityDirections;
+        }
+        return direction;
     }
 
     /**

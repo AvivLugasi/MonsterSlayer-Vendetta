@@ -72,27 +72,19 @@ public class InputHandler implements KeyListener {
         switch(code){
             case KeyEvent.VK_W:
             case KeyEvent.VK_UP:
-                if(!this.isDown){
-                    this.isUp = true;
-                }
+                this.isUp = true;
                 break;
             case KeyEvent.VK_D:
             case KeyEvent.VK_RIGHT:
-                if(!this.isLeft){
-                    this.isRight = true;
-                }
+                this.isRight = true;
                 break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
-                if(!this.isUp){
-                    this.isDown = true;
-                }
+                this.isDown = true;
                 break;
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
-                if(!this.isRight){
-                    this.isLeft = true;
-                }
+                this.isLeft = true;
                 break;
         }
     }
