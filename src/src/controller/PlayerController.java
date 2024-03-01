@@ -61,26 +61,66 @@ public class PlayerController implements EntityController {
         int current_x = this.player.getPositionX();
         int current_y = this.player.getPositionY();
         int speed = this.player.getSpeed();
+        EntityDirections direction;
         // we assume the player isn't static, if no movement key was pressed then
         // we will set isStatic = false
         this.player.setStatic(false);
         if(this.inputHandler.getUp()){
+            if(this.inputHandler.getRight()){
+                this.player.setPositionX(current_x + speed);
+                direction=RIGHT;
+            }
+            else if(this.inputHandler.getLeft()){
+                this.player.setPositionX(current_x - speed);
+                direction=LEFT;
+            }else{
+                direction=UP;
+            }
             this.player.setPositionY(current_y - speed);
-            this.player.setDirection(EntityDirections.UP);
+            this.player.setDirection(direction);
         }else if(this.inputHandler.getLeft()){
+            if(this.inputHandler.getUp()){
+                this.player.setPositionY(current_y - speed);
+                direction=UP;
+            }
+            else if(this.inputHandler.getDown()){
+                this.player.setPositionY(current_y + speed);
+                direction=DOWN;
+            }else{
+                direction=LEFT;
+            }
             this.player.setPositionX(current_x - speed);
-            this.player.setDirection(EntityDirections.LEFT);
+            this.player.setDirection(direction);
         }else if(this.inputHandler.getDown()){
+            if(this.inputHandler.getRight()){
+                this.player.setPositionX(current_x + speed);
+                direction=RIGHT;
+            }
+            else if(this.inputHandler.getLeft()){
+                this.player.setPositionX(current_x - speed);
+                direction=LEFT;
+            }else{
+                direction=DOWN;
+            }
             this.player.setPositionY(current_y + speed);
-            this.player.setDirection(EntityDirections.DOWN);
+            this.player.setDirection(direction);
         }else if(this.inputHandler.getRight()){
+            if(this.inputHandler.getUp()){
+                this.player.setPositionY(current_y - speed);
+                direction=UP;
+            }
+            else if(this.inputHandler.getDown()){
+                this.player.setPositionY(current_y + speed);
+                direction=DOWN;
+            }else{
+                direction=RIGHT;
+            }
             this.player.setPositionX(current_x + speed);
-            this.player.setDirection(RIGHT);
+            this.player.setDirection(direction);
         } else{
             this.player.setStatic(true);
         }
     }
-
 
     /**
      * paint the player entity on the screen based on the updated status

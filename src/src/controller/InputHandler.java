@@ -76,6 +76,12 @@ public class InputHandler implements KeyListener {
                     this.isUp = true;
                 }
                 break;
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                if(!this.isLeft){
+                    this.isRight = true;
+                }
+                break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
                 if(!this.isUp){
@@ -86,12 +92,6 @@ public class InputHandler implements KeyListener {
             case KeyEvent.VK_LEFT:
                 if(!this.isRight){
                     this.isLeft = true;
-                }
-                break;
-            case KeyEvent.VK_D:
-            case KeyEvent.VK_RIGHT:
-                if(!this.isLeft){
-                    this.isRight = true;
                 }
                 break;
         }
@@ -111,6 +111,10 @@ public class InputHandler implements KeyListener {
             case KeyEvent.VK_UP:
                 this.isUp = false;
                 break;
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                this.isRight = false;
+                break;
             case KeyEvent.VK_S:
             case KeyEvent.VK_DOWN:
                 this.isDown = false;
@@ -118,10 +122,6 @@ public class InputHandler implements KeyListener {
             case KeyEvent.VK_A:
             case KeyEvent.VK_LEFT:
                 this.isLeft = false;
-                break;
-            case KeyEvent.VK_D:
-            case KeyEvent.VK_RIGHT:
-                this.isRight = false;
                 break;
         }
     }
