@@ -154,7 +154,7 @@ public abstract class Entity implements DynamicStatus{
 
     public void setSpriteNum() {
         this.spriteCounter++;
-        if (this.spriteCounter % 10 == 0) {
+        if (this.spriteCounter % 7 == 0) {
             this.spriteID++;
         }
         if (this.spriteID >= this.spriteNum) {
