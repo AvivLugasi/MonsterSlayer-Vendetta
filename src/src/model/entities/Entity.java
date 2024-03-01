@@ -50,9 +50,20 @@ public abstract class Entity implements DynamicStatus{
      */
     private BufferedImage image;
 
+    /**
+     * control when to replace image
+     */
     public int spriteCounter = 0;
 
-    public int spriteNum = 1;
+    /**
+     * amount of sprites of the current movement
+     */
+    public int spriteNum = 0;
+
+    /**
+     * sprite image serial number
+     */
+    public int spriteID = 0;
 
     /**
      * Initialize the Entity
@@ -139,6 +150,16 @@ public abstract class Entity implements DynamicStatus{
 
     public void setImage(BufferedImage image){
         this.image = image;
+    }
+
+    public void setSpriteNum() {
+        this.spriteCounter++;
+        if (this.spriteCounter % 10 == 0) {
+            this.spriteID++;
+        }
+        if (this.spriteID >= this.spriteNum) {
+            this.spriteID = 0;
+        }
     }
 
 }

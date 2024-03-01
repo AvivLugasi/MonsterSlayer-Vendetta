@@ -4,14 +4,13 @@ import model.entities.Entity;
 import model.entities.Player;
 import model.entities.enums.EntityDirections;
 import view.Utils;
-import view.gui.interfaces.EntityController;
+import controller.interfaces.EntityController;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static data.gameSettings.GameSettingsMacros.*;
 import static data.gameSettings.PlayerSettingsMacros.*;
+import static model.entities.enums.EntityDirections.*;
 
 /**
  * Control the model.Player class status and paints it
@@ -76,11 +75,12 @@ public class PlayerController implements EntityController {
             this.player.setDirection(EntityDirections.DOWN);
         }else if(this.inputHandler.getRight()){
             this.player.setPositionX(current_x + speed);
-            this.player.setDirection(EntityDirections.RIGHT);
+            this.player.setDirection(RIGHT);
         } else{
             this.player.setStatic(true);
         }
     }
+
 
     /**
      * paint the player entity on the screen based on the updated status
@@ -91,7 +91,7 @@ public class PlayerController implements EntityController {
             this.draw(graphics2D);
             graphics2D.dispose();
         } catch(IllegalArgumentException e){
-            //System.out.println("Expected to get Graphics2D instance");
+            System.out.println("Expected to get Graphics2D instance");
         }
     }
 
@@ -104,23 +104,55 @@ public class PlayerController implements EntityController {
         return this.player;
     }
 
-    public ArrayList<String> getAnimations(){
-        ArrayList<String> animationsPathsList = null;
-        switch(this.player.getDirection()){
-            case UP:
-                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_UP));
-                break;
-            case DOWN:
-                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_DOWN));
-                break;
-            case LEFT:
-                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_LEFT));
-                break;
-            case RIGHT:
-                animationsPathsList = new ArrayList<>(Arrays.asList(PLAYER_ARMORED_STATIC_STAND_RIGHT));
-                break;
-        }
-        return animationsPathsList;
+    public String getAnimations(){
+        String animationsPath;
+        animationsPath = getMovementAnimations();
+        return animationsPath;
     }
 
+    private String getMovementAnimations(){
+        if (this.player.getStatic()) {
+            switch (this.player.getDirection()) {
+                case UP:
+                case RIGHT:
+                    return getMovementsPathStatics(RIGHT);
+                case LEFT:
+                case DOWN:
+                    return getMovementsPathStatics(LEFT);
+            }
+        } else {
+            switch (this.player.getDirection()) {
+                case UP:
+                case RIGHT:
+                    return getMovementsPathDynamic(RIGHT);
+                case LEFT:
+                case DOWN:
+                    return getMovementsPathDynamic(LEFT);
+            }
+        }
+        return null;
+    }
+
+    private String getMovementsPathStatics(EntityDirections direction){
+        if(this.player.spriteID >= STATIC_SPRITES_NUM_RIGHT || this.player.spriteID >= STATIC_SPRITES_NUM_LEFT){
+            this.player.spriteID = 0;
+        }
+        if(direction == RIGHT){
+            this.player.spriteNum = STATIC_SPRITES_NUM_RIGHT;
+            return PLAYER_ARMORED_STATIC_STAND_RIGHT_PREFIX;
+        }
+        this.player.spriteNum = STATIC_SPRITES_NUM_LEFT;
+        return PLAYER_ARMORED_STATIC_STAND_LEFT_PREFIX;
+    }
+
+    private String getMovementsPathDynamic(EntityDirections direction){
+        if(this.player.spriteID >= MOVEMENT_SPRITES_NUM){
+            this.player.spriteID = 0;
+        }
+        this.player.spriteNum = MOVEMENT_SPRITES_NUM;
+        if(direction == RIGHT){
+            return PLAYER_ARMORED_MOVEMENT_RIGHT_PREFIX;
+        }
+        return PLAYER_ARMORED_MOVEMENT_LEFT_PREFIX;
+    }
 }

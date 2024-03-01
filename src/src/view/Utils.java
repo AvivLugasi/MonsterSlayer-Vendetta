@@ -1,6 +1,7 @@
 package view;
 
-import view.gui.interfaces.EntityController;
+import model.entities.Entity;
+import controller.interfaces.EntityController;
 import view.gui.interfaces.PanelOnFrame;
 
 import static data.gameSettings.GameSettingsMacros.*;
@@ -11,8 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Utils class for the view package, handle various of gui methods
@@ -73,20 +72,22 @@ public class Utils {
             File file = new File(path);
             image = ImageIO.read(file);
         } catch (IOException e) {
+            System.out.println(path);
             e.printStackTrace();
         }
         return image;
     }
 
     public void draw(Graphics2D graphics2D, EntityController entityController){
-        ArrayList<String> animationsPathsList = entityController.getAnimations();
-        for(String animationPath: animationsPathsList) {
-            entityController.getEntity().setImage(this.getImage(animationPath));
-            graphics2D.drawImage(entityController.getEntity().getImage(),
-                    entityController.getEntity().getPositionX(),
-                    entityController.getEntity().getPositionY(),
-                    entityController.getEntity().getWidth(),
-                    entityController.getEntity().getHeight(), null);
-        }
+        String animationPath = entityController.getAnimations();
+        Entity entity = entityController.getEntity();
+        String animationPathCopy = animationPath + entity.spriteID + ".png";
+        entity.setSpriteNum();
+        entity.setImage(this.getImage(animationPathCopy));
+        graphics2D.drawImage(entity.getImage(),
+                entity.getPositionX(),
+                entity.getPositionY(),
+                entity.getWidth(),
+                entity.getHeight(), null);
     }
 }
