@@ -30,7 +30,7 @@ public class TileController implements RenderedObject {
 
     public TileController(GamePanel gamePanel){
         this.gamePanel = gamePanel;
-        setTiles(SwampTiles.getTestCodeMap(), ASSETS_DIR + "\\environment\\tests\\testMap1.csv");
+        setTiles(SwampTiles.getTestCodeMap(), ASSETS_DIR + "\\environment\\tests\\testMap5.csv");
     }
 
     /**

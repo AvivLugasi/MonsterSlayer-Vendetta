@@ -26,6 +26,7 @@ public class SwampTiles {
     public static final String SWAMP_TILES_BUSH2 = SWAMP_TILES_PATH + "\\Bush_3a_16x16.png";
     public static final String SWAMP_TILES_BUSH3 = SWAMP_TILES_PATH + "\\Bush_2_16x16.png";
     public static final String SWAMP_TILES_MUSHROOM = SWAMP_TILES_PATH + "\\Mushroom_1_16x16.png";
+    public static final String SWAMP_TILES_DIRT = SWAMP_TILES_PATH + "\\Bramble_1_16x16.png";
 
     public static HashMap<Integer, TilePathCollisionPair> getTestCodeMap(){
         HashMap<Integer, TilePathCollisionPair> codeTileMap = new HashMap<>();
@@ -47,6 +48,7 @@ public class SwampTiles {
         codeTileMap.put(16, new TilePathCollisionPair(SWAMP_TILES_GRASS2, false));
         codeTileMap.put(17, new TilePathCollisionPair(SWAMP_TILES_GRASS3, false));
         codeTileMap.put(18, new TilePathCollisionPair(SWAMP_TILES_GRASS4, false));
+        codeTileMap.put(19, new TilePathCollisionPair(SWAMP_TILES_DIRT, false));
 
         return codeTileMap;
     }
