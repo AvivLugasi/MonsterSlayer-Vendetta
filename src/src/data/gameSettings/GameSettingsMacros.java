@@ -15,10 +15,12 @@ public class GameSettingsMacros {
 
     public static final Color MAIN_FRAME_PANEL_BACKGROUND_COLOR = Color.BLACK;
 
-    public static final  int DEFAULT_TILE_SIZE = 96;
+    public static final  int DEFAULT_ENTITY_TILE_SIZE = 96;
 
-    public static final int MAX_SCREEN_COL = 14;
-    public static final int MAX_SCREEN_ROW = 10;
+    public static final int ENVIRONMENT_TILE_SIZE = 16;
+
+    public static final int MAX_SCREEN_COL = 84;
+    public static final int MAX_SCREEN_ROW = 60;
 
     public static final int FPS = 60;
 

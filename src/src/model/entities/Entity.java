@@ -1,30 +1,11 @@
 package model.entities;
 
 import model.entities.enums.EntityDirections;
+import model.environment.Tile;
 import model.interfaces.DynamicStatus;
 import java.awt.image.BufferedImage;
 
-public abstract class Entity implements DynamicStatus{
-    /**
-     * Entity's x coordinates on the screen
-     */
-    private int positionX;
-
-    /**
-     * Entity's y coordinates on the screen
-     */
-    private int positionY;
-
-    /**
-     * Entity's tile width on the screen
-     */
-    private final int width;
-
-    /**
-     * Entity's tile height on the screen
-     */
-    private final int height;
-
+public abstract class Entity extends Tile implements DynamicStatus{
     /**
      * Entity's health
      */
@@ -44,11 +25,6 @@ public abstract class Entity implements DynamicStatus{
      * whether the entity is static
      */
     private boolean isStatic;
-
-    /**
-     * Current image of the entity
-     */
-    private BufferedImage image;
 
     /**
      * control when to replace image
@@ -74,32 +50,11 @@ public abstract class Entity implements DynamicStatus{
                   int speed,
                   int width,
                   int height){
-        this.positionX = x;
-        this.positionY = y;
+        super(x,y,width,height);
         this.health = health;
         this.speed = speed;
-        this.width = width;
-        this.height = height;
         this.direction = EntityDirections.RIGHT;
         this.isStatic = true;
-    }
-
-    public void setPositionX(int x){
-        // TODO: add validations before setting position, throw exception if not
-        this.positionX = x;
-    }
-
-    public void setPositionY(int y){
-        // TODO: add validations before setting position, throw exception if not
-        this.positionY = y;
-    }
-
-    public int getWidth(){
-        return this.width;
-    }
-
-    public int getHeight(){
-        return this.height;
     }
 
     public void setHealth(int heath){
@@ -120,14 +75,6 @@ public abstract class Entity implements DynamicStatus{
         return this.speed;
     }
 
-    public int getPositionX(){
-        return this.positionX;
-    }
-
-    public int getPositionY(){
-        return this.positionY;
-    }
-
     public EntityDirections getDirection(){
         return this.direction;
     }
@@ -142,14 +89,6 @@ public abstract class Entity implements DynamicStatus{
 
     public boolean getStatic(){
         return this.isStatic;
-    }
-
-    public BufferedImage getImage(){
-        return this.image;
-    }
-
-    public void setImage(BufferedImage image){
-        this.image = image;
     }
 
     public void setSpriteNum() {

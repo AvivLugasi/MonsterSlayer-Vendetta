@@ -1,5 +1,6 @@
 package controller;
 
+import controller.interfaces.RenderedObject;
 import model.entities.Entity;
 import model.entities.Player;
 import model.entities.enums.EntityDirections;
@@ -15,7 +16,7 @@ import static model.entities.enums.EntityDirections.*;
 /**
  * Control the model.Player class status and paints it
  */
-public class PlayerController implements EntityController {
+public class PlayerController implements EntityController, RenderedObject {
 
     /**
      * Entity of the model.Player class
@@ -36,8 +37,8 @@ public class PlayerController implements EntityController {
      */
     public PlayerController(InputHandler inputHandler){
         // setting default position at the center of the screen
-        int x = (DEFAULT_TILE_SIZE*MAX_SCREEN_COL/2)-DEFAULT_TILE_SIZE/2;
-        int y = (DEFAULT_TILE_SIZE*MAX_SCREEN_ROW/2)-DEFAULT_TILE_SIZE/2;
+        int x = (ENVIRONMENT_TILE_SIZE *MAX_SCREEN_COL/2)- ENVIRONMENT_TILE_SIZE /2;
+        int y = (ENVIRONMENT_TILE_SIZE *MAX_SCREEN_ROW/2)- ENVIRONMENT_TILE_SIZE /2;
         this.player = new Player(x, y, INITIAL_PLAYER_HEALTH, INITIAL_PLAYER_SPEED, PLAYER_TILE_SIZE, PLAYER_TILE_SIZE);
         this.inputHandler = inputHandler;
     }
@@ -123,14 +124,14 @@ public class PlayerController implements EntityController {
     public void paintComponent(Graphics2D graphics2D){
         try {
             this.draw(graphics2D);
-            graphics2D.dispose();
         } catch(IllegalArgumentException e){
             System.out.println("Expected to get Graphics2D instance");
         }
     }
 
     private void draw(Graphics2D graphics2D){
-        this.utils.draw(graphics2D, this);
+        this.utils.drawEntity(graphics2D, this);
+        this.player.setSpriteNum();
     }
 
     @Override

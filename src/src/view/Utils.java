@@ -1,17 +1,21 @@
 package view;
 
-import model.entities.Entity;
 import controller.interfaces.EntityController;
+import model.entities.Entity;
+import model.environment.Tile;
 import view.gui.interfaces.PanelOnFrame;
-
-import static data.gameSettings.GameSettingsMacros.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import static data.gameSettings.GameSettingsMacros.*;
 
 /**
  * Utils class for the view package, handle various of gui methods
@@ -78,16 +82,19 @@ public class Utils {
         return image;
     }
 
-    public void draw(Graphics2D graphics2D, EntityController entityController){
+    public void drawEntity(Graphics2D graphics2D, EntityController entityController){
         String animationPath = entityController.getAnimations();
         Entity entity = entityController.getEntity();
         String animationPathCopy = animationPath + entity.spriteID + ".png";
-        entity.setSpriteNum();
         entity.setImage(this.getImage(animationPathCopy));
-        graphics2D.drawImage(entity.getImage(),
-                entity.getPositionX(),
-                entity.getPositionY(),
-                entity.getWidth(),
-                entity.getHeight(), null);
+        this.draw(graphics2D, entity);
+    }
+
+    public void draw(Graphics2D graphics2D , Tile tile){
+        graphics2D.drawImage(tile.getImage(),
+                tile.getPositionX(),
+                tile.getPositionY(),
+                tile.getWidth(),
+                tile.getHeight(), null);
     }
 }

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import controller.InputHandler;
 import controller.PlayerController;
-import view.Utils;
+import controller.TileController;
 import view.gui.interfaces.PanelOnFrame;
 
 import java.awt.*;
@@ -20,17 +20,17 @@ public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
     /**
      * The tile size on the panel
      */
-    public final int TILE_SIZE;
+    private final int TILE_SIZE;
 
     /**
      * the screen width = MAX_SCREEN_COL * TILE_SIZE
      */
-    public final int SCREEN_WIDTH;
+    private final int SCREEN_WIDTH;
 
     /**
      * the screen height = MAX_SCREEN_ROW * TILE_SIZE
      */
-    public final int SCREEN_HEIGHT;
+    private final int SCREEN_HEIGHT;
 
     /**
      * The thread of the panel, when alive actions can
@@ -50,11 +50,16 @@ public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
     PlayerController playerController;
 
     /**
+     * Control the map tiles
+     */
+    TileController tileController;
+
+    /**
      * Initialize the GamePanel
      * @param BackGround (Color) - the background color of the screen
      */
     public GamePanel(Color BackGround){
-        this.TILE_SIZE = DEFAULT_TILE_SIZE; // 96X96 pixel entity
+        this.TILE_SIZE = ENVIRONMENT_TILE_SIZE; // 16X16 pixel entity
         this.SCREEN_WIDTH = MAX_SCREEN_COL * TILE_SIZE; // 1344
         this.SCREEN_HEIGHT = MAX_SCREEN_ROW * TILE_SIZE; // 960
         this.setBackground(BackGround);
@@ -85,6 +90,7 @@ public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
         this.inputHandler = new InputHandler();
         this.addKeyListener(this.inputHandler);
         this.setFocusable(true);
+        this.tileController = new TileController(this);
         this.playerController = new PlayerController(this.inputHandler);
     }
 
@@ -121,10 +127,23 @@ public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
         try {
             super.paintComponent(graphics);
             Graphics2D graphics2D = (Graphics2D) graphics;
+            this.tileController.paintComponent(graphics2D);
             this.playerController.paintComponent(graphics2D);
             graphics.dispose();
         } catch(IllegalArgumentException e){
             System.out.println("Expected to get Graphics2D instance");
         }
+    }
+
+    public int getTILE_SIZE() {
+        return TILE_SIZE;
+    }
+
+    public int getSCREEN_WIDTH() {
+        return SCREEN_WIDTH;
+    }
+
+    public int getSCREEN_HEIGHT() {
+        return SCREEN_HEIGHT;
     }
 }
