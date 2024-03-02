@@ -13,3 +13,6 @@
 13=Bush_3a_16x16.png
 14=Bush_2_16x16.png
 15=Mushroom_1_16x16.png
+16=Grass_2_16x16.png
+17=Grass_3_16x16.png
+18=Grass_4_16x16.png

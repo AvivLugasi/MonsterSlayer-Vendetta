@@ -13,6 +13,7 @@ import controller.interfaces.EntityController;
 import controller.interfaces.RenderedObject;
 import data.gameSettings.GameSettingsMacros;
 import data.mapSettings.SwampTiles;
+import data.mapSettings.TilePathCollisionPair;
 import model.entities.Entity;
 import model.environment.Tile;
 import view.GamePanel;
@@ -37,7 +38,7 @@ public class TileController implements RenderedObject {
      * @param codeTileMap hashmap of numeric codes as keys and the tile image paths that they represents
      * @param mapFilePath the file path to the map tiles codes file
      */
-    public void setTiles(HashMap<Integer, String>codeTileMap, String mapFilePath){
+    public void setTiles(HashMap<Integer, TilePathCollisionPair>codeTileMap, String mapFilePath){
         ArrayList<Tile> tiles = new ArrayList<>();
         int x = 0, y = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(mapFilePath))) {
@@ -46,13 +47,14 @@ public class TileController implements RenderedObject {
                 String[] values = line.split(",");
                 for (String num : values) {
                     int tileCode = Integer.parseInt(num.trim());
-                    String tileFilePath = codeTileMap.get(tileCode);
+                    String tileFilePath = codeTileMap.get(tileCode).path;
                     BufferedImage tileImage = this.utils.getImage(tileFilePath);
                     Tile tile = new Tile(x,
                                          y,
                                          GameSettingsMacros.ENVIRONMENT_TILE_SIZE,
                                          GameSettingsMacros.ENVIRONMENT_TILE_SIZE,
                                          tileImage);
+                    tile.setCollision(codeTileMap.get(tileCode).collision);
                     tiles.add(tile);
                     x+=this.gamePanel.getTILE_SIZE();
                     if(x >= this.gamePanel.getSCREEN_WIDTH()){
