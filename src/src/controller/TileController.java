@@ -32,6 +32,11 @@ public class TileController implements RenderedObject {
         setTiles(SwampTiles.getTestCodeMap(), ASSETS_DIR + "\\environment\\tests\\testMap1.csv");
     }
 
+    /**
+     * Set the tiles of the current map
+     * @param codeTileMap hashmap of numeric codes as keys and the tile image paths that they represents
+     * @param mapFilePath the file path to the map tiles codes file
+     */
     public void setTiles(HashMap<Integer, String>codeTileMap, String mapFilePath){
         ArrayList<Tile> tiles = new ArrayList<>();
         int x = 0, y = 0;
@@ -60,23 +65,6 @@ public class TileController implements RenderedObject {
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        for(int i = 0; i < codedMap.size() && y < this.gamePanel.getSCREEN_HEIGHT(); i++){
-//            for(int j = 0; j < codedMap.get(i).size(); j++){
-//                String tileFilePath = codeTileMap.get(codedMap.get(i).get(j));
-//                BufferedImage tileImage = this.utils.getImage(tileFilePath);
-//                Tile tile = new Tile(x,
-//                                     y,
-//                                     GameSettingsMacros.ENVIRONMENT_TILE_SIZE,
-//                                     GameSettingsMacros.ENVIRONMENT_TILE_SIZE,
-//                                     tileImage);
-//                tiles.add(tile);
-//                x+=this.gamePanel.getTILE_SIZE();
-//                if(x >= this.gamePanel.getSCREEN_WIDTH()){
-//                    x = 0;
-//                    y+=this.gamePanel.getTILE_SIZE();
-//                }
-//            }
-//        }
         this.tiles = tiles;
     }
 

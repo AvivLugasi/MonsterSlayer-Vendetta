@@ -9,3 +9,7 @@
 9=Tree_6a_16x16.png
 10=Tree_6b_16x16.png
 11=Grass_1_16x16.png
+12=Bush_3b_16x16.png
+13=Bush_3a_16x16.png
+14=Bush_2_16x16.png
+15=Mushroom_1_16x16.png

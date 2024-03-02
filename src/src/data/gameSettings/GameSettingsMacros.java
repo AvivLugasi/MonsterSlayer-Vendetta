@@ -17,10 +17,9 @@ public class GameSettingsMacros {
 
     public static final  int DEFAULT_ENTITY_TILE_SIZE = 96;
 
-    public static final int ENVIRONMENT_TILE_SIZE = 16;
-
-    public static final int MAX_SCREEN_COL = 84;
-    public static final int MAX_SCREEN_ROW = 60;
+    public static final int ENVIRONMENT_TILE_SIZE = 32;
+    public static final int MAX_SCREEN_COL = 30;
+    public static final int MAX_SCREEN_ROW = 25;
 
     public static final int FPS = 60;
 

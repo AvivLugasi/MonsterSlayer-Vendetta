@@ -59,9 +59,9 @@ public class GamePanel extends JPanel implements  Runnable, PanelOnFrame {
      * @param BackGround (Color) - the background color of the screen
      */
     public GamePanel(Color BackGround){
-        this.TILE_SIZE = ENVIRONMENT_TILE_SIZE; // 16X16 pixel entity
-        this.SCREEN_WIDTH = MAX_SCREEN_COL * TILE_SIZE; // 1344
-        this.SCREEN_HEIGHT = MAX_SCREEN_ROW * TILE_SIZE; // 960
+        this.TILE_SIZE = ENVIRONMENT_TILE_SIZE; // 32X32 pixel entity
+        this.SCREEN_WIDTH = MAX_SCREEN_COL * TILE_SIZE; // 960
+        this.SCREEN_HEIGHT = MAX_SCREEN_ROW * TILE_SIZE; // 800
         this.setBackground(BackGround);
         // set panel general assets status
         this.setAssetsStatus();

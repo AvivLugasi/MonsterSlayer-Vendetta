@@ -18,6 +18,10 @@ public class SwampTiles {
     public static final String SWAMP_TILES_TREE6 = SWAMP_TILES_PATH + "\\Tree_6a_16x16.png";
     public static final String SWAMP_TILES_TREE7 = SWAMP_TILES_PATH + "\\Tree_6b_16x16.png";
     public static final String SWAMP_TILES_GRASS1 = SWAMP_TILES_PATH + "\\Grass_1_16x16.png";
+    public static final String SWAMP_TILES_BUSH1 = SWAMP_TILES_PATH + "\\Bush_3b_16x16.png";
+    public static final String SWAMP_TILES_BUSH2 = SWAMP_TILES_PATH + "\\Bush_3a_16x16.png";
+    public static final String SWAMP_TILES_BUSH3 = SWAMP_TILES_PATH + "\\Bush_2_16x16.png";
+    public static final String SWAMP_TILES_MUSHROOM = SWAMP_TILES_PATH + "\\Mushroom_1_16x16.png";
 
     public static HashMap<Integer, String> getTestCodeMap(){
         HashMap<Integer, String> codeTileMap = new HashMap<>();
@@ -32,6 +36,10 @@ public class SwampTiles {
         codeTileMap.put(9, SWAMP_TILES_TREE6);
         codeTileMap.put(10, SWAMP_TILES_TREE7);
         codeTileMap.put(11, SWAMP_TILES_GRASS1);
+        codeTileMap.put(12, SWAMP_TILES_BUSH1);
+        codeTileMap.put(13, SWAMP_TILES_BUSH2);
+        codeTileMap.put(14, SWAMP_TILES_BUSH3);
+        codeTileMap.put(15, SWAMP_TILES_MUSHROOM);
 
         return codeTileMap;
     }
